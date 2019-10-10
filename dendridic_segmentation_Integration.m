@@ -1,7 +1,7 @@
 %% Pull file
 % ref: http://www.matlabtips.com/how-to-load-tiff-stacks-fast-really-fast/
-Path = 'New images March 2019/#34 c9-2/';
-File = '#34 c9-2 20x';
+Path = 'Images/Helicobacter_Pylori_Positive/RA035_1/';
+File = 'RA035_1_Composite with Selection';
 FileTif = strcat(Path,File,'.tif');
 InfoImage = imfinfo(FileTif);
 mImage = InfoImage(1).Width;
@@ -58,11 +58,11 @@ SelectionPath = strcat(Path,"Selection.csv");
 Selection = selection_logical(SelectionPath);
 
 %padd ones if size doesn't match and error is thrown
-% Selection = padarray(Selection',[size(FinalImage(:,:,Nindex),2)-size(Selection,2) 2],1,'post')';
-% Selection = padarray(Selection',[size(FinalImage(:,:,Nindex),1)-size(Selection,1) 1],1,'post')';
+Selection = padarray(Selection',[abs(size(FinalImage(:,:,Nindex),2)-size(Selection,2)) 2],1,'post')';
+Selection = padarray(Selection',[abs(size(FinalImage(:,:,Nindex),1)-size(Selection,1)) 1],1,'post')';
 
 % adjust size if ROI doesn't match image size
-Selection = Selection(1:size(FinalImage(:,:,Nindex),1),1:size(FinalImage(:,:,Nindex),2));
+ Selection = Selection(1:size(FinalImage(:,:,Nindex),1),1:size(FinalImage(:,:,Nindex),2));
 
 
 
